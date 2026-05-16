@@ -1,4 +1,4 @@
-name: CI/CD Docker Compose
+name: CI/CD Docker Build & Push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +22,29 @@ jobs:
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Build services
-        run: docker compose build --no-cache
+      # =========================
+      # VENTAS
+      # =========================
+      - name: Build ventas
+        run: docker build -t stirnbur/ventas:latest ./back-Ventas_SpringBoot/Springboot-API-REST
+
+      - name: Push ventas
+        run: docker push stirnbur/ventas:latest
+
+      # =========================
+      # DESPACHOS
+      # =========================
+      - name: Build despachos
+        run: docker build -t stirnbur/despachos:latest ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+
+      - name: Push despachos
+        run: docker push stirnbur/despachos:latest
+
+      # =========================
+      # FRONTEND
+      # =========================
+      - name: Build frontend
+        run: docker build -t stirnbur/frontend:latest ./front_despacho
+
+      - name: Push frontend
+        run: docker push stirnbur/frontend:latest
