@@ -26,25 +26,25 @@ jobs:
       # VENTAS
       # =========================
       - name: Build ventas
-        run: docker build -t stirnbur/ventas:latest ./back-Ventas_SpringBoot/Springboot-API-REST
+        run: docker build -t strinbur/ventas-api:latest ./back-Ventas_SpringBoot/Springboot-API-REST
 
       - name: Push ventas
-        run: docker push stirnbur/ventas:latest
+        run: docker push strinbur/ventas-api:latest
 
       # =========================
       # DESPACHOS
       # =========================
       - name: Build despachos
-        run: docker build -t stirnbur/despachos:latest ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+        run: docker build -t strinbur/despachos-api:latest ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
 
       - name: Push despachos
-        run: docker push stirnbur/despachos:latest
+        run: docker push strinbur/despachos-api:latest
 
       # =========================
       # FRONTEND
       # =========================
       - name: Build frontend
-        run: docker build -t stirnbur/frontend:latest ./front_despacho
+        run: docker build -t strinbur/frontend-app:latest ./front_despacho
 
       - name: Push frontend
-        run: docker push stirnbur/frontend:latest
+        run: docker push strinbur/frontend-app:latest
